@@ -1,5 +1,6 @@
 {
-  "name": "react-template",
+  "name": "auth-fe",
+  "homepage": "https://nxhawk.github.io/auth-fe",
   "private": true,
   "version": "0.0.0",
   "type": "module",
