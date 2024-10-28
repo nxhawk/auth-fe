@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
+import { removeAllToken } from "../utils/helper";
 
 const PrimaryAppBar = () => {
   const navigate = useNavigate();
@@ -45,8 +46,7 @@ const PrimaryAppBar = () => {
         onClick={() => {
           setAnchorEl(null);
           removeAuth();
-          localStorage.clearItem("accessToken");
-          localStorage.clearItem("refreshToken");
+          removeAllToken();
         }}
       >
         Logout
