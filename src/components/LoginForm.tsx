@@ -83,7 +83,7 @@ const LoginForm = () => {
       <Controller
         name="password"
         control={control}
-        rules={{ required: true, minLength: 6 }}
+        rules={{ required: true, minLength: 8 }}
         defaultValue=""
         render={({ field }) => (
           <TextField
@@ -93,7 +93,7 @@ const LoginForm = () => {
             fullWidth
             variant="outlined"
             error={!!errors.password}
-            helperText={errors.password ? "Password is required and should be at least 6 characters." : ""}
+            helperText={errors.password ? "Password is required and should be at least 8 characters." : ""}
             type={showPassword ? "text" : "password"}
             InputProps={{
               endAdornment: (
