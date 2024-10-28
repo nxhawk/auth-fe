@@ -11,6 +11,11 @@ export const register = async (data: IRegisterUserReq) => {
   return res.data;
 };
 
+export const profile = async () => {
+  const res = await AxiosClient.get("/user/me");
+  return res.data;
+};
+
 export const refreshToken = async (refreshToken: string) => {
   const res = await AxiosClient.get("/auth/refresh", {
     headers: {

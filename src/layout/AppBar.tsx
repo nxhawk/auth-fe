@@ -41,7 +41,16 @@ const PrimaryAppBar = () => {
       onClose={handleMenuClose}
       style={{ marginTop: "35px" }}
     >
-      {auth != null && <MenuItem>{auth?.email}</MenuItem>}
+      {auth != null && (
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            navigate("/profile");
+          }}
+        >
+          {auth?.email}
+        </MenuItem>
+      )}
       <MenuItem
         onClick={() => {
           setAnchorEl(null);

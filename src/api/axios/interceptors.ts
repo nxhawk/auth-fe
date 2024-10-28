@@ -22,8 +22,6 @@ const onRequestConfig = (config: IRequestAxios) => {
 
 const onResponseError = async (err: AxiosError, axiosInstance: AxiosInstance): Promise<AxiosError | undefined> => {
   const originalConfig = err.config as InternalAxiosRequestConfig;
-  console.log(err);
-
   if (err.response?.status === 401) {
     const currentRefreshToken = localStorage.getItem("refreshToken");
     removeAllToken();
@@ -31,10 +29,17 @@ const onResponseError = async (err: AxiosError, axiosInstance: AxiosInstance): P
       if (window.location.pathname == "/login") return Promise.reject(err?.response?.data);
       return;
     }
-    const token = await refreshToken(currentRefreshToken!);
-    localStorage.setItem("accessToken", token.accessToken);
-    localStorage.setItem("refreshToken", token.refreshToken);
-    originalConfig.headers.Authorization = `Bearer ${token.accessToken}`;
+
+    try {
+      const token = await refreshToken(currentRefreshToken!);
+      localStorage.setItem("accessToken", token.accessToken);
+      localStorage.setItem("refreshToken", token.refreshToken);
+      originalConfig.headers.Authorization = `Bearer ${token.accessToken}`;
+    } catch (error) {
+      localStorage.removeItem("auth");
+      if (window.location.pathname == "/login") return Promise.reject(err?.response?.data);
+      return;
+    }
 
     return axiosInstance(originalConfig);
   }
