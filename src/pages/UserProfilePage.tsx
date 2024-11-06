@@ -19,7 +19,7 @@ const UserProfilePage = () => {
         // set current user
       } catch (err) {
         toast.error("AcessToken has expired");
-        navigate("/login");
+        navigate("/login", { replace: true });
       }
       setIsLoading(false);
     }
@@ -42,7 +42,7 @@ const UserProfilePage = () => {
               </Typography>
               <div>
                 <Typography variant="body1" style={{ textAlign: "center" }}>
-                  Email: {user?.email ?? "email@example.com"}
+                  Email: {user?.email}
                 </Typography>
               </div>
               <div>

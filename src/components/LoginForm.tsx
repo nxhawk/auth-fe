@@ -8,6 +8,7 @@ import { login } from "../api/apiUser";
 import { toast } from "react-toastify";
 import { ErrorResponse } from "../types/response";
 import { AuthContext } from "../contexts/AuthContext";
+import { ILoginUserRes } from "../types/user";
 
 type Inputs = {
   email: string;
@@ -30,7 +31,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     try {
-      const response = await login({
+      const response: ILoginUserRes = await login({
         email: data.email,
         password: data.password,
       });
@@ -38,7 +39,7 @@ const LoginForm = () => {
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
       // set current user
-      changeAuth({ email: data.email });
+      changeAuth({ email: data.email, name: response.name });
       toast.success("Login successfully");
       navigate("/");
     } catch (err) {

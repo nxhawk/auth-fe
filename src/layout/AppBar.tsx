@@ -6,7 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
-import { removeAllToken } from "../utils/helper";
+import { logout } from "../api/apiUser";
+import { toast } from "react-toastify";
 
 const PrimaryAppBar = () => {
   const navigate = useNavigate();
@@ -21,6 +22,14 @@ const PrimaryAppBar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    toast.success("Logout successfully");
+    navigate("/login");
+    setAnchorEl(null);
+    removeAuth();
   };
 
   const menuId = "primary-search-account-menu";
@@ -51,15 +60,7 @@ const PrimaryAppBar = () => {
           {auth?.email}
         </MenuItem>
       )}
-      <MenuItem
-        onClick={() => {
-          setAnchorEl(null);
-          removeAuth();
-          removeAllToken();
-        }}
-      >
-        Logout
-      </MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

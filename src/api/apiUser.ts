@@ -12,7 +12,12 @@ export const register = async (data: IRegisterUserReq) => {
 };
 
 export const profile = async () => {
-  const res = await AxiosClient.get("/user/me");
+  const res = await AxiosClient.get("/user/profile");
+  return res.data;
+};
+
+export const logout = async () => {
+  const res = await AxiosClient.post("/user/logout");
   return res.data;
 };
 

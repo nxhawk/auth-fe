@@ -1,7 +1,3 @@
-export interface IUser {
-  email: string;
-}
-
 export interface IFullUser {
   email: string;
   name: string;
@@ -16,4 +12,9 @@ export interface IRegisterUserReq {
 export interface ILoginUserReq {
   email: string;
   password: string;
+}
+
+export interface ILoginUserRes extends IFullUser {
+  accessToken: string;
+  refreshToken: string;
 }

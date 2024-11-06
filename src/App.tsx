@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
@@ -16,9 +15,9 @@ function App() {
         rtl={false}
         pauseOnHover
         pauseOnFocusLoss={false}
-        className="w-fit hidden md:block"
-        limit={5}
+        className="w-fit"
       />
+      <RouterProvider router={router} />
     </>
   );
 }

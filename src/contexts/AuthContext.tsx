@@ -1,11 +1,12 @@
 import { ReactNode, createContext } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
-import { IUser } from "../types/user";
+import { removeAllToken } from "../utils/helper";
+import { IFullUser } from "../types/user";
 
 interface AuthContextType {
-  auth: IUser;
+  auth: IFullUser;
   // eslint-disable-next-line no-unused-vars
-  changeAuth: (newAuth: IUser) => void;
+  changeAuth: (newAuth: IFullUser) => void;
   removeAuth: () => void;
 }
 
@@ -22,12 +23,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initialState: null,
   });
 
-  function changeAuth(newAuth: IUser) {
+  function changeAuth(newAuth: IFullUser) {
     setAuth(newAuth);
   }
 
   function removeAuth() {
     setAuth(null);
+    removeAllToken();
   }
 
   return (
