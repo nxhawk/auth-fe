@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 function PrivateRoute() {
   const { auth } = React.useContext(AuthContext)!;
   if (auth == null || !localStorage.getItem("accessToken")) {
-    toast.error("You don't have permission to access this page");
+    toast.error("You don't have permission");
     return <Navigate to="/login" replace />;
   }
   return <Outlet />;
